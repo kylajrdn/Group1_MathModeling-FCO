@@ -9,7 +9,9 @@ This project examines the student fatigue and recovery using Structural Equation
 - `src/` - contains the codes used for analysis (MATLAB and R)
 
 ## Methods Used 
-
+- Mean computation using R
+- Structural Equation Modeling (SEM) to determine parameter values used in the model
+- Time-based fatigue modeling using MATLAB
 
 ## Methodology 
 
