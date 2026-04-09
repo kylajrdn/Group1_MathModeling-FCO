@@ -17,4 +17,8 @@ This project examines the student fatigue and recovery using Structural Equation
 ### How to Run
 1. Open the dataset in the `data/` folder
 2. Run `mean_computation.R` to compute average values.
-3. Run `fatigueovertime.m` in MATLAB to model fatigue over time. 
+3. Run `fatigueovertime.m` in MATLAB to model fatigue over time.
+
+## Outputs
+- Final Paper: `docs/Group1_FCO.pdf`
+- Video Presentation: 
