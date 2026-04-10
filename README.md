@@ -14,6 +14,7 @@ This project examines the student fatigue and recovery using Structural Equation
 - Time-based fatigue modeling using MATLAB
 
 ## Methodology 
+Structural Equation Modeling (SEM) was used to analyze the relationships between variables affecting student fatigue. The resulting parameter values from SEM were then incorporated into the model (`fatigueovertime.m`) to simulate fatigue trends over time.
 
 
 ### How to Run
