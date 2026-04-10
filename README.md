@@ -24,4 +24,5 @@ Structural Equation Modeling (SEM) was used to analyze the relationships between
 
 ## Outputs
 - Final Paper: `docs/Group1_FCO.pdf`
-- Video Presentation: 
+- Video Presentation: https://drive.google.com/file/d/1bC9skQmil6cCUlnJt9KUvVxR2bpZ4jf9/view?usp=sharing
+  
