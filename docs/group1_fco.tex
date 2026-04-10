@@ -1,0 +1,554 @@
+\documentclass [12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{caption} 
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Matlab,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    commentstyle=\color{green!50!black},
+    keywordstyle=\color{blue}
+}
+
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{references.bib}
+\renewcommand{\UrlFont}{\rmfamily}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\setlength{\bibitemsep}{1em} 
+
+\setlength{\parindent}{2em} 
+\setlength{\parskip}{0.5em} 
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    
+\begin{tabular}{c c c}
+    \includegraphics[width=3cm]{bulsulogo.jpg} &
+    \raisebox{0.9cm}{
+        \begin{tabular}{c}
+            \textbf{Bulacan State University} \\
+            College of Science \\
+            Department of Mathematics
+        \end{tabular}
+    }
+    &
+    \includegraphics[width=3cm]{cslogo.png}
+\end{tabular}
+
+\vspace{2cm}
+    
+    {\LARGE \textbf{Application of Mathematical Modeling in Student Fatigue-Recovery Analysis} \par}
+    
+    \vspace{1.5cm}
+    
+    {\large A Mini Research Paper Submitted in Partial Fulfillment of the Requirements for the Course in Mathematical Modeling \par}
+    
+    \vspace{2cm}
+    
+    {\large 
+    Submitted by: \\
+    BSM AS 3A \\
+    Jardin, Kyla M. \\
+    Mahilom, Melody G. \\
+    Sison, Larrasophia S. \\
+    Villarias, Aaliyah Gwyneth E. \\
+    }
+    
+    \vfill
+    
+    {\large 
+    Submitted to: \\
+    Mr. Aarhus M. Dela Cruz, LPT, MSc \\
+    April 12, 2026
+    }
+    
+\end{titlepage}
+
+\newpage
+
+
+\begin{abstract}
+    This study explores the dynamics of student fatigue and recovery using a combined approach of mathematical modeling and Structural Equation Modeling (SEM). Data were collected from 274 BS Mathematics students across Applied Statistics, Computer Science, and Business Applications programs under the College of Science using a 5-point Likert scale survey measuring study load, academic stress, sleep quality, time management, fatigue level, and academic performance. SEM results revealed that study load and academic stress significantly increase fatigue, while sleep quality and time management significantly reduce it. However, fatigue level was found to have no significant direct effect on academic performance. A time-based differential equation model was created to model student fatigue and recovery. Empirical parameters used in the model were derived from the SEM analysis. The model revealed that an increase in study time results in a constant increase in student fatigue. In addition, it shows how important it is to find a balance between schoolwork and time to rest. It also demonstrates how mathematical modeling can enhance our comprehension of student well-being and facilitate the planning of effective academic interventions grounded in data.
+\end{abstract}
+
+\newpage
+
+\section*{Introduction}
+
+Modern higher education has experienced significant shifts over the years which results in a highly demanding academic environment. Today, university programs require more than just attending traditional lectures; they have evolved to include flexible learning modalities, self-directed study, and rigorous coursework that demand continuous cognitive effort and adaptation from students. As a result, students spend extended study hours with limited rest which may lead to gradual accumulation of fatigue over time. 
+
+As demonstrated by \textcite{bouloukaki2023academic}, higher academic workload and extended cognitive demands greatly increase fatigue levels among students especially when it comes to demanding academic periods of time. However, the presence of these intensive academic demands creates a complex environment wherein students must strategically manage their time in order to maintain their well-being. Many students struggle to balance their heavy academic workloads with adequate rest which results in high levels of stress. Often, educators and institutions rely on intuition or general observations rather than concrete data to understand this student burnout, which can lead to ineffective support systems and prolonged student fatigue.
+
+In this context, mathematical modeling offers a valuable and systematic approach to analyzing student fatigue and recovery dynamics. By utilizing a time-based mathematical framework, this study aims to examine how fatigue accumulates during study periods and recovers during rest. Specifically, the researchers evaluate six key variables: Study Load (SL), Academic Stress (AS), Sleep Quality (SQ), Time Management (TM), Fatigue Level (FL), and Academic Performance (AP) among BS Mathematics students at the College of Science. To achieve this, survey data will be collected and analyzed using SEM and a time-based mathematical model to simulate fatigue accumulation and recovery. 
+
+\section*{Preliminaries}
+
+\subsection*{A. Structural Equation Modeling (SEM)}
+
+Structural Equation Modeling (SEM) is a statistical method that enables the analysis of complex relationships between observed and latent variables all together \parencite{geeksforgeeks_sem_overview2025}. In this context, the constructs examined in this study which includes the Study Load, Academic Stress, Sleep Quality, Time Management, Fatigue Level, and Academic Performance are all considered as latent variables. These are measured indirectly through survey indicators. 
+
+SEM is particularly suitable for this study because it enables the testing of direct and indirect effects which is critical for understanding how study hours and rest affect student fatigue and, in turn, academic performance. In addition, it also complements the mathematical model. While the time-based mathematical model simulates fatigue accumulation and recovery under different study/rest scenarios, SEM provides statistical validation of the observed relationships from survey data which ensures that the patterns are not due to chance. 
+
+SEM involves several important concepts that help in understanding the relationships among variables. 
+
+\begin{itemize}
+    \item \textbf{Latent Variables} - these are not directly observed variables but are derived from measured indicators. In this study, constructs such as Study Load, Academic Stress, Sleep Quality, Time Management, Fatigue Level, and Academic Performance are treated as latent variables. 
+
+    \item \textbf{Observed Variables} - these are directly measured variables that are typically obtained from survey items or indicators used to represent latent constructs. 
+
+    \item \textbf{Endogenous Variables} - these variables are the ones being influenced by other variables in the model. In this study, Academic Stress, Sleep Quality, Time Management, Fatigue Level and Academic Performance are considered as endogenous variables. 
+
+    \item \textbf{Exogenous Variables} - these variables are the one that influence other variables but are not influenced by any variable in the model. In this study, Study Load is considered as an exogenous variable. 
+\end{itemize}
+
+\subsection*{B.Variable Description}
+
+\begin{table}[H]
+\captionsetup{
+    labelfont=bf,
+    labelsep=newline,
+    justification=raggedright,
+    singlelinecheck=false
+}
+\caption{Measurement of Constructs}
+
+\begin{adjustbox}{max width=\textwidth} 
+\centering
+\begin{tabular}{l c p{9cm}}
+\toprule
+\textbf{Latent Variable} & \textbf{Indicator} & \multicolumn{1}{c}{\textbf{Survey Item}} \\
+\midrule
+Study Load (SL) & SL1 & I study for more than 4 hours per day. \\
+ & SL2 & I often study continuously without long breaks. \\
+ & SL3 & My academic workload is heavy. \\
+ & SL4 & I spend most of my day doing school-related tasks. \\
+\midrule
+Academic Stress (AS) & AS1 & I feel pressured by academic deadlines. \\
+ & AS2 & Quizzes and exams make me feel stressed. \\
+ & AS3 & I worry about my academic performance. \\
+ & AS4 & I feel overwhelmed by school requirements. \\
+\midrule
+Sleep Quality (SQ) & SQ1 & I sleep at least 7-8 hours per night. \\
+ & SQ2 & I wake up feeling refreshed. \\
+ & SQ3 & I have difficulty falling asleep. \\
+ & SQ4 & I experience interrupted sleep. \\
+\midrule
+Time Management (TM) & TM1 & I plan my study schedule in advance. \\
+ & TM2 & I avoid cramming before deadlines. \\
+ & TM3 & I prioritize important tasks first. \\
+ & TM4 & I manage my time effectively. \\
+\midrule
+Fatigue Level (FL) & FL1 & I feel physically exhausted during the day. \\
+ & FL2 & I feel mentally drained after studying. \\
+ & FL3 & I struggle to stay focused because of tiredness. \\
+ & FL4 & I feel low in energy most of the time. \\
+\midrule
+Academic Performance (AP) & AP1 & I am satisfied with my academic performance. \\
+ & AP2 & I can concentrate well during classes. \\
+ & AP3 & I complete academic tasks efficiently. \\
+ & AP4 & I perform well in my academic tasks. \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+Table 1 shows the latent variables and their indicators. These indicators allow SEM to capture the relationships between students’ study habits, fatigue, and academic performance. 
+
+\subsection*{C. Modeling Change Over Time}
+
+The process of modeling change over time involves observing and representing how things evolve over time, recognizing patterns, trends, and variations, and being able to critically interpret visual or data representations of change. In this study, fatigue is modeled as a variable that changes over time. It is increasing with periods of intense study and decreasing with rest. This approach recognizes that fatigue is a changing condition rather than a fixed one. 
+
+\section*{Methods and Application}
+
+\subsection*{A. Model Description}
+
+\noindent\textbf{Structural Equation Modeling}
+
+In this study, the Structural Equation Modeling (SEM) framework is used to examine the relationships among the variables. The model consists of independent variables, a mediating variable, and a dependent variable. 
+
+\subsubsection*{a. Independent Variables}
+
+The independent variables are the factors that may influence fatigue and academic performance. These include: 
+
+\begin{itemize}
+    \item \textbf{Study Load} - refers to the amount of time and effort students spend on academic tasks. 
+    \item \textbf{Academic Stress} - refers to the level of stress experienced due to academic demands.
+    \item \textbf{Sleep Quality} - refers to how well students sleep which includes restfulness and sleep duration.
+    \item \textbf{Time Management} - refers to the ability of students to effectively organize and allocate their time for academic tasks.
+\end{itemize}
+
+\subsubsection*{b. Mediating Variable}
+
+The mediating variable explains how or why the independent variables affect the dependent variable. In this study, the mediating variable is: 
+
+\begin{itemize}
+    \item \textbf{Fatigue Level} - represents the level of physical and mental exhaustion that is experienced by students. This may result from high study load, stress, poor sleep quality, and ineffective time management. 
+\end{itemize}
+
+\subsubsection*{c. Dependent Variable}
+
+The dependent variable is the main outcome of the study:
+
+\begin{itemize}
+    \item \textbf{Academic Performance} - refers to the students’ level of academic achievement. 
+\end{itemize}
+
+
+\subsection*{B. Mathematical Model}
+
+The proposed fatigue-recovery model is formulated as follows:
+
+\begin{equation*}
+\frac{dF}{dt} = a S(t) + b AS(t) - c R(t) - d F(t)
+\end{equation*}
+
+where : 
+\begin{align*}
+F(t)  &= \text{fatigue level at time } t \\
+S(t)  &= \text{study intensity (hours of study at time } t\text{)} \\
+AS(t) &= \text{academic stress at time } t \\
+R(t)  &= \text{rest time at time } t
+\end{align*}
+
+In order to represent how fatigue evolves over time, differential equations are used since it is the most suitable in modeling time-dependent changes.  In this model, each term is interpreted as follows: 
+
+\begin{itemize}
+    \item \textbf{aS(t)} - represents the increase in fatigue due to study intensity. Based on the study of \textcite{alhamed2023academicstress} which demonstrates that higher study demands lead to greater mental and physical strain among students. 
+
+    \item \textbf{bAS(t)} - represents the increase in fatigue caused by academic stress. Based on the study of \textcite{zhang2022academicstress} which shows that academic stress predicts higher emotional and regulatory fatigue among undergraduate students. 
+
+    \item \textbf{-cR(t)} - represents the reduction in fatigue due to rest. Based on the study of \textcite{shaw2025restvalues} which shows that undergraduate students report that leisure, rest, and intentional breaks help them regain energy and reduce fatigue from academic work.  
+
+    \item \textbf{-dF(t)} - represents the natural physiological recovery where fatigue decreases over time even in the absence of active rest. This is supported by the same study of \textcite{shaw2025restvalues} which also shows that students’ energy naturally comes back over time after studying even if they don’t take planned breaks. 
+\end{itemize}
+
+The coefficients a,b, and c are derived from SEM path coefficients, this ensures that the model is grounded in empirical data. Since the data used in this study are cross-sectional, time-dependent parameters cannot be directly estimated. Thus, the parameter d which represents the natural recovery rate is assumed and assessed during simulation. Furthermore, time t is treated as a discrete simulation variable which represents the successive time steps. This allows the model to illustrate how fatigue changes dynamically over time despite the absence of longitudinal data. 
+
+\subsection*{C. Implementation}
+
+The study used a quantitative cross-sectional study with 264 participants from the undergraduate students of BS Mathematics at the College of Science. For the sampling technique, a simple random sampling was employed to ensure unbiasedness. In addition, this study intends to examine the relationship between the latent variables: study load, academic stress, sleep quality, time management, fatigue level, and academic performance. However, since these variables cannot be measured directly, the researchers will disseminate a survey questionnaire, which will contain 4 questions per latent variable that will serve as its indicators. All items will be considered through this 5-point Likert scale: 
+
+\renewcommand{\arraystretch}{1.5} % pataasin ang height ng rows
+
+\begin{table}[H]
+\captionsetup{
+    labelfont=bf,
+    labelsep=newline,
+    justification=raggedright,
+    singlelinecheck=false
+}
+\caption{5-point Likert Scale}
+\label{tab:likert}
+
+\centering
+\begin{tabular}{c >{\centering\arraybackslash}p{12cm}} 
+\toprule
+\textbf{Scale} & \textbf{Interpretation} \\
+\midrule
+1 & Strongly Disagree \\
+2 & Disagree \\
+3 & Neutral \\
+4 & Agree \\
+5 & Strongly Agree \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\renewcommand{\arraystretch}{1} 
+
+The survey was conducted via Google Forms and was disseminated through link distribution to different section group chats. All data were collected through voluntary answering of Google Forms, which also includes informed consent to have their data used for academic purposes and nothing more. This is while also ensuring the confidentiality and anonymity of the persons involved. Upon answering, the data was transferred to Microsoft Excel for the tidying of data. 
+
+To examine the relationship between these latent variables, the study employed partial least squares-structural equation modeling (PLS-SEM). This is a non-parametric method that does not assume normality and is distribution-free. This was analyzed with the use of SMARTPLS 4.0, through Windows 11. 
+
+\newpage
+\subsection*{D. Results and Visualizations}
+
+\noindent\textbf{PLS-SEM Algorithm Results}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{compositereliability.png} 
+    \caption{Composite Reliability (rho\_c) of Constructs}
+    \label{fig:composite_reliability}
+\end{figure}
+
+Figure \ref{fig:composite_reliability} illustrates the Composite Reliability (rho\_c) for the various constructs. The graph shows that the constructs for Academic Performance, Academic Stress, Fatigue Level, and Time Management are displayed in green, indicating that their scores have successfully reached or exceeded the 0.70 threshold. This confirms that these variables have high consistency and reliability. While the bars for Sleep Quality and Study Load are marked in red, their values remain close to the threshold. These constructs were retained in the model to preserve conceptual depth, as their reliability scores were improved through the systematic removal of indicators with low factor loadings. Overall, the results demonstrate that the measurement model is robust and reliable, providing a sound basis for further structural analysis. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{AVE.png} 
+    \caption{Average Variance Extracted (AVE)}
+    \label{fig:average_variance_extracted}
+\end{figure}
+
+Figure \ref{fig:average_variance_extracted} shows the results for Average Variance Extracted (AVE), which is used to establish the convergent validity of the measurement model. The graph illustrates that the constructs for Academic Performance, Academic Stress, Fatigue Level, Study Load, and Time Management have all achieved green constructs, somehow reaching the acceptable threshold. This indicates that these constructs have a strong convergent validity. Although the Sleep Quality construct is currently slightly below the 0.50 mark (marked in red), it remains highly acceptable for further analysis because its Composite Reliability (rho\_c) is above 0.70. As noted by statistical experts, if the CR is higher than 0.70, the convergent validity of the construct is still considered adequate even if the AVE is slightly lower than 0.50. Consequently, the overall measurement model demonstrates sufficient validity and reliability to proceed with structural path analysis.
+
+\begin{table}[H]
+\captionsetup{
+    labelfont=bf,          
+    labelsep=newline,       
+    justification=raggedright,
+    singlelinecheck=false
+}
+\caption{Measurement of Constructs} 
+\label{tab:measurement}
+\begin{tabularx}{\textwidth}{l*{2}{>{\centering\arraybackslash}X}}
+    \hline
+    \textbf{Variable} & \textbf{$R^2$} & \textbf{Adjusted $R^2$} \\
+    \hline
+    Academic Performance & 0.055 & 0.038 \\
+    Academic Stress      & 0.051 & 0.048 \\
+    Fatigue              & 0.158 & 0.145 \\
+    Sleep Quality        & 0.010 & 0.006 \\
+    Time                 & 0.000 & -0.003 \\
+    \hline
+\end{tabularx}
+\end{table}
+
+Table \ref{tab:measurement} presents the $R^2$ and Adjusted $R^2$ values for the internal constructs in the model. Based on the results, Fatigue has the highest $R^2$ value of 0.158, indicating that approximately 15.8\% of the variance in student fatigue is explained by the predictors in the model, such as Study Load and Stress. Academic Performance and Academic Stress show $R^2$ values of 0.055 (5.5\%) and 0.051 (5.1\%), respectively. Meanwhile, Sleep Quality($R^2$ = 0.010) and Time ($R^2$ = 0.000) show very low relevance, but even though it is weak or somehow moderate, it is still acceptable due to the given complexity of human behavior and some external factors. The Adjusted $R^2$  is also provided to account for the number of predictors, ensuring a more conservative and accurate estimate of the model's explanatory power.
+
+\renewcommand{\arraystretch}{1.2} 
+\begin{table}[H]
+\captionsetup{
+    labelfont=bf,
+    labelsep=newline,
+    justification=raggedright,
+    singlelinecheck=false
+}
+\caption{Path Coefficients (Bootstrapping)}
+\label{tab:path_coeff}
+
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Path} & \(\boldsymbol{\beta}\) \textbf{(Original Sample)} & \textbf{M (Mean)} & \textbf{SD (STDEV)} & \textbf{t-value} & \textbf{p-value} \\
+\midrule
+Academic Stress → Academic Performance & -0.099 & -0.097 & 0.063 & 1.576 & 0.115 \\
+Academic Stress → Fatigue Level       & 0.137  & 0.136  & 0.068 & 2.022 & 0.043 \\
+Academic Stress → Sleep Quality       & -0.098 & -0.106 & 0.067 & 1.459 & 0.145 \\
+Academic Stress → Time Management     & 0.017  & 0.015  & 0.065 & 0.256 & 0.798 \\
+Fatigue Level → Academic Performance  & 0.092  & 0.093  & 0.075 & 1.229 & 0.219 \\
+Sleep Quality → Academic Performance  & 0.128  & 0.134  & 0.077 & 1.671 & 0.095 \\
+Sleep Quality → Fatigue Level         & -0.145 & -0.147 & 0.060 & 2.412 & 0.016 \\
+Study Load → Academic Performance     & -0.134 & -0.135 & 0.070 & 1.920 & 0.055 \\
+Study Load → Academic Stress          & 0.227  & 0.233  & 0.065 & 3.499 & 0.000 \\
+Study Load → Fatigue Level            & 0.163  & 0.168  & 0.060 & 2.714 & 0.007 \\
+Time Management → Academic Performance& 0.075  & 0.075  & 0.076 & 0.993 & 0.321 \\
+Time Management → Fatigue Level       & -0.253 & -0.258 & 0.061 & 4.152 & 0.000 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\renewcommand{\arraystretch}{1} 
+
+Table \ref{tab:path_coeff} presents the bootstrapping results for the model. The table indicated that academic stress did not significantly predict academic performance ($\beta$ = -0.099, p = .115), sleep quality ($\beta$ = -0.098, p = .145), or even time management ($\beta$ = 0.017, p = .798), but it significantly predicted fatigue level ($\beta$ = 0.137, p = .043). On the other hand, fatigue level did not significantly predict academic performance ($\beta$ = 0.092, p = .219). Similarly, sleep quality was not a significant predictor of academic performance ($\beta$ = 0.128, p = .095), although it significantly predicted fatigue level ($\beta$ = -0.145, p = .016). Furthermore, study load showed a marginal, non-significant effect on academic performance ($\beta$ = -0.134, p = .055), but significantly predicted academic stress ($\beta$ = 0.227, $p < .001$) and fatigue level ($\beta$ = 0.163, p = .007). Lastly, time management did not significantly predict academic performance ($\beta$ = 0.075, p = .321), but it significantly predicted fatigue level ($\beta$ = -0.253, $p < .001$). Overall, the significant relationships were found primarily in predicting fatigue level and academic stress, while other predictors of academic performance were largely non-significant.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{sem_diagram.png} 
+    \caption{SEM Diagram}
+    \label{fig:sem_diagram}
+\end{figure}
+
+Figure \ref{fig:sem_diagram} illustrates the graphical model and the relationship among study load, academic stress, sleep quality, time management, fatigue level, and academic performance. The results indicate that study load significantly increases both academic stress and fatigue level, suggesting that heavier workloads of a student can contribute to greater stress and tiredness. Academic stress also positively influences fatigue level, although it does not have a direct effect on academic performance. Sleep quality shows a negative relationship with fatigue level, indicating that better sleep reduces fatigue, but its impact on academic performance is not significant. Similarly, time management significantly reduces fatigue level but does not directly influence academic performance. Furthermore, fatigue level itself does not significantly predict academic performance. In conclusion, the model suggests that while these factors play an important role in influencing fatigue, they do not strongly determine the academic performance of a student.
+
+
+\subsubsection*{Setting Model Parameters from SEM and Survey Data}
+
+The effects of study load, academic stress, and rest on fatigue were taken from the SEM results, using the path coefficients as model parameters. Specifically, Study Load had $a = 0.163$, Academic Stress $b = 0.137$, and rest which come from Sleep Quality $c = 0.145$. Fatigue also naturally decreased over time with $d = 0.3$. The simulation used the survey averages as baseline inputs: study load $S_{\text{avg}} = 3.887$, academic stress $AS_{\text{avg}} = 4.358$, and rest $R_{\text{avg}} = 2.431$. The initial fatigue was calculated as
+\[
+F_0 = a S_{\text{avg}} + b AS_{\text{avg}} - c R_{\text{avg}},
+\]
+providing a realistic starting point. The model was then run over time with changing study, stress, and rest levels, producing the fatigue pattern shown in Figure \ref{fig:fatigueovertime}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fatigueovertime.png} 
+    \caption{Fatigue Over Time}
+    \label{fig:fatigueovertime}
+\end{figure}
+
+Figure \ref{fig:fatigueovertime} illustrates how fatigue changes throughout the day in relation to study hours. Fatigue is low and slightly decreasing during the early hours (0–6 hours), showing that there is little effort when there is no studying yet. As study hours begin (around 8 hours onward), fatigue slowly increases, followed by a sharper rise during extended study periods (approximately 10–17 hours). Although there is a slight fluctuation around midday, the overall trend continues upward, reaching its peak in the late afternoon. After the study period ends, fatigue levels begin to decline gradually, approaching its baseline levels by the later hours of the day. This pattern indicates that prolonged study duration contributes to the accumulation of fatigue, with the greatest exhaustion occurring after sustained periods of studying.
+
+\subsection*{E. Analysis and Discussion}
+
+The SEM results give real-world evidence that the proposed mathematical model's structure is correct. In particular, the strong positive effects of Study Load and Academic Stress on Fatigue Level confirm the terms $aS(t)$ and $bAS$ in the differential equation. This shows that both study intensity and stress add to fatigue over time.
+
+The substantial adverse effects of Sleep Quality and Time Management on Fatigue Level confirmed the recovery aspect denoted by $cR(t)$, suggesting that rest and effective time management mitigate fatigue. The results show that the mathematical model fits with the data that was collected. This is because the key predictors of fatigue in the SEM are the same as the variables in the fatigue–recovery equation.
+
+However, during the examination of the model, a few indicators of each latent variable were found to have low loadings, causing a lower Average Variance Explained (AVE). To increase the model’s explained variance proportion, the researchers decided to remove two indicators per latent variable (from the original four each). This is to improve the interpretability of the model as well as its convergent validity. 
+
+Now, let us proceed to the model:
+\[
+\frac{dF}{dt} = aS(t) + bAS(t) - cR(t) - dF(t)
+\]
+
+This explains how the variable, fatigue levels, changes over time depending on its indicators. In fact, when student intensity level and academic stress are dominating, the fatigue level increases. Conversely, fatigue decreases when rest and recovery are made. The findings in Figure \ref{fig:fatigueovertime} support this behavior of the model, as it was found that prolonged study time contributes to a steady accumulation of fatigue, with the greatest exhaustion occurring after sustained periods of studying. 
+
+However, take note that the fatigue level is a mediator variable and not the dependent variable that we want to get the outcome. Both the SEM diagram and the mathematical model indicate that fatigue is the center of the system because most predictors influence it. But fatigue itself does not significantly predict academic performance, indicating that it is a weak mediator. This suggests that the variations that fatigue can explain are limited. 
+
+Furthermore, the other variables that are found to be weak and non-significant suggest that although they may play an important role in determining the fatigue level, it is not significant in terms of predicting academic performance. Thus, the findings suggest that factors that influence a college student’s academic performance might be beyond those included in the model.
+
+From this perspective, we can see that a student’s state of well-being depends on an increase in academic load and stress. This highlights the importance of balancing academic workload and recovery time. Based on these findings, the following are recommended:
+
+\begin{itemize}
+    \item For students, it is recommended to properly manage their time and avoid studying continuously for long hours, such as 8-10 hours, because the model suggests a tipping point at this time. Avoid cramming and know what tasks should be prioritized. And most importantly, schedule rest hours to have at least leisure time to manage stress. 
+    \item For professors, it is advised that workloads should be balanced and given enough time, as study loads are a significant predictor of fatigue. 
+    \item For parents and guardians, it is suggested to understand that lack of sleep is not the only indicator of a child’s fatigue, but can also come from stress, poor time management, and increased academic responsibilities. 
+\end{itemize}
+
+These recommendations are to help avoid fatigue accumulation over time. But despite providing insightful insights, the study has its own limitations. Since the data used in the study were collected from a survey, the students may choose randomly from the choices without thinking about whether they really coincide with them or not. On the other hand, they could also be biased or not too truthful about their answers. And both might lead to an incorrect conclusion. Moreover, the results are limited to BS Mathematics students only and may not generalize to the overall population of students at Bulacan State University. As mentioned earlier in the results and the earlier part of this discussion, the model has low explanatory power in predicting academic performance. In addition, since this is a cross-sectional study, SEM can only establish associations and not causality. Thus, future researchers shall account for these given limitations. 
+
+\newpage
+\section*{Conclusion}
+
+This study illustrates that student burnout is not solely a subjective experience but a measureable and evolving process that can be examined using mathematical modeling and Structural Equation Modeling (SEM). The study used data from 274 BS Mathematics students to recognize significant factors within demanding academic programs.
+
+The results show that the level of study and academic stress increases the level of fatigue significantly, while the quality and time management of sleep reduces the level of fatigue significantly. On the other hand, the level of fatigue was not found to have any significant impact on academic performance. This implies that there could be other external factors which may affect the academic performance of the students that were not included in the model. In addition, the results show that the level of academic stress is high while the quality of sleep is low. This is consistent with the inverse relationship between the level of academic demands and rest in the sense that the level of work increases the accumulation of fatigue faster than the level of rest. The fatigue-recovery model that was created shows this pattern even more clearly. It shows that long study sessions lead to peak fatigue levels which are then followed by gradual recovery during rest.
+
+The results of this study highlights the importance of balancing academic workload and recovery time. Expecting students to sustain heavy academic demands without sufficient rest may lead to long-term fatigue accumulation. In conclusion, educational institutions may benefit from implementing data-driven strategies such as improved workload pacing and time management support in order to better promote student well-being.
+
+\newpage
+\printbibliography
+
+
+\newpage 
+\section*{Appendices}
+
+\subsection*{Appendix A: R Code}
+Mean Computation
+\begin{lstlisting}[language=R]
+install.packages("tidyverse")
+library(tidyverse)
+library(readxl)
+cleaned_mathmod <- read_excel("cleaned_mathmod.xlsx")
+View(cleaned_mathmod)
+
+df <- cleaned_mathmod
+
+df$sl_average <- rowMeans(df[, c("SL3", "SL4")], na.rm = TRUE)
+df$as_average <- rowMeans(df[, c("AS3", "AS4")], na.rm = TRUE)
+df$sq_average <- rowMeans(df[, c("SQ2", "SQ4_REV")], na.rm = TRUE)
+
+summary(df[, c("sl_average", "as_average", "sq_average")])
+\end{lstlisting}
+
+\subsection*{Appendix B: MATLAB Code}
+Simulation of Student Fatigue Model
+\begin{lstlisting}[language=Matlab]
+% --- Parameters ---
+a = 0.163;   % effect of study load
+b = 0.137;   % effect of academic stress
+c = 0.145;   % effect of rest
+d = 0.3;     % natural fatigue decay rate
+
+% --- Survey averages ---
+S_avg = 3.887;  % sl_average mean
+AS_avg = 4.358; % as_average mean
+R_avg = 2.431;  % sq_average mean
+
+% --- Compute initial fatigue (F0) from survey averages ---
+F0 = a*S_avg + b*AS_avg - c*R_avg;
+
+% --- Simulation setup ---
+dt = 0.1;          
+T = 240;           
+time = (0:T-1)*dt; 
+F = zeros(1,T);    
+F(1) = F0;         
+
+% --- Study schedule (S(t)) ---
+S = zeros(1,T);
+for i = 1:T
+   t = time(i);
+   if (t >= 8 && t <= 12) || (t >= 13 && t <= 17)
+       S(i) = S_avg / 5;  % normalize to 0-1
+   else
+       S(i) = 0;
+   end
+end
+
+% --- Academic stress schedule (AS(t)) ---
+AS = zeros(1,T);  % pre-allocate
+for i = 1:T
+   t = time(i);
+   if t < 8
+       AS(i) = AS_avg * 0.5;                        % low stress before study
+   elseif t >= 8 && t <= 12
+       AS(i) = AS_avg * (0.5 + 0.5*(t-8)/4);        % gradually rise to AS_avg in morning
+   elseif t > 12 && t < 13
+       AS(i) = AS_avg * 0.75;                       % moderate stress during lunch break
+   elseif t >= 13 && t <= 17
+       AS(i) = AS_avg * (0.75 + 0.25*(t-13)/4);     % slight rise during afternoon study
+   else
+       AS(i) = AS_avg * 0.5;                        % low stress during evening/night
+   end
+end
+
+% --- Rest schedule (R(t)) ---
+R = zeros(1,T);
+for i = 1:T
+   t = time(i);
+   if (t > 12 && t < 13)       % lunch break
+       R(i) = R_avg / 5 * 0.5; % moderate intensity
+   elseif (t >= 22 || t <= 6)  % night sleep
+       R(i) = R_avg / 5 * 1;   % full intensity
+   else
+       R(i) = 0;               % no rest other times
+   end
+end
+
+% --- Euler simulation ---
+for i = 1:T-1
+   dFdt = a*S(i) + b*AS(i) - c*R(i) - d*F(i);
+   F(i+1) = F(i) + dt*dFdt;
+end
+
+% --- Compute steady-state fatigue ---
+F_ss = (a*mean(S) + b*mean(AS) - c*mean(R)) / d;
+
+% --- Plot ---
+figure;
+plot(time, F, 'r-', 'LineWidth', 2);
+hold on;
+
+% Steady-state line 
+yline(F_ss, 'k--', 'LineWidth', 2);
+xlabel('Time (hours)');
+ylabel('Fatigue Level F(t)');
+title('Fatigue Over Time');
+grid on;
+
+% Highlight study hours
+ymax = max(F)*1.1;
+fill([8 12 12 8], [0 0 ymax ymax], 'b', 'FaceAlpha', 0.1, 'EdgeColor', 'none');
+fill([13 17 17 13], [0 0 ymax ymax], 'b', 'FaceAlpha', 0.1, 'EdgeColor', 'none');
+
+% Legend
+legend('Fatigue Level', 'Steady-State Fatigue', 'Study Hours');
+hold off;
+\end{lstlisting}
+
+\end{document}
+
+
+
